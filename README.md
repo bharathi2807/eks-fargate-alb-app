@@ -32,7 +32,7 @@ Client
 ├── requirements.txt # Python dependencies
 ├── Dockerfile # Container image definition
 ├── flask-eks.yml # Kubernetes manifests (Deployment, Service, Ingress)
-├── iam_policy.json # IAM policy for ALB controller
+└── iam_policy.json # IAM policy for ALB controller
 
 
 ---
@@ -56,6 +56,29 @@ Client
 5. Access app via ALB DNS
 
 ---
+## Key CLI Commands Used
+
+### Create EKS Fargate Cluster
+```bash
+eksctl create cluster \
+  --name demo-cluster \
+  --region us-east-1 \
+  --fargate
+helm repo add eks https://aws.github.io/eks-charts
+helm repo update
+
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
+  -n kube-system \
+  --set clusterName=demo-cluster \
+  --set serviceAccount.create=false \
+  --set serviceAccount.name=aws-load-balancer-controller
+
+kubectl apply -f flask-eks.yml
+
+kubectl get pods -A
+kubectl get svc -A
+kubectl get ingress -A
+---
 
 ## What I Learned
 
@@ -66,7 +89,5 @@ Client
 
 ---
 
-## Author
-
-**Bharathi**  
-Automation / DevOps Engineer  
+👨‍💻 Author
+Jeeva Bharathi Aspiring DevOps / Cloud Engineer
