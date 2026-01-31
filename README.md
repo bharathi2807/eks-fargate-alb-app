@@ -109,5 +109,9 @@ kubectl get ingress -A
 
 ---
 
-👨‍💻 Author
-Jeeva Bharathi Aspiring DevOps / Cloud Engineer
+## 👨‍💻 Author
+
+**Jeeva Bharathi**
+Aspiring DevOps / Cloud Engineer
+
+---
